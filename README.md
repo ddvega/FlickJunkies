@@ -1,5 +1,7 @@
 # FlickJunkies
 
+## view at http://flickjunkies.herokuapp.com/
+
 ## Django Project
 
 ### Allows users to search for movies and put them on lists and share them with other users.
@@ -21,3 +23,9 @@ D_PASSWORD=<mysql password>
 D_HOST=<mysql hostname>
 D_PORT=<port>
 ```
+
+![1](https://github.com/ddvega/FlickJunkies/static/images/1.png)
+
+![2](https://github.com/ddvega/FlickJunkies/static/images/2.png)
+
+![3](https://github.com/ddvega/FlickJunkies/static/images/3.png)
