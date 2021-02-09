@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="addSpace"></div>
+
+<div class="mainBlock">
+  <table
+    class="mainTable table table-condensed table-responsive table-hover sortable"
+  >
+    <thead>
+      <tr>
+        <th scope="col" style="width: 20%">User</th>
+        <th scope="col" style="width: 60%">List Name</th>
+        <th scope="col" style="width: 10%">Count</th>
+        <th scope="col" style="width: 10%">View</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for r in data %} {% if r.private == 0 %}
+      <tr>
+        <td style="width: 20%">{{ r.user }}</td>
+        <td style="width: 60%">{{ r.listName }}</td>
+        <td style="width: 10%">{{ r.count }}</td>
+
+        <td style="width: 10%">
+          <form action="/lists/{{r.user}}/{{r.listName}}" method="get">
+            <input type="submit" class="btn btn-sm darkButton" value="view" />
+          </form>
+        </td>
+      </tr>
+      {% endif %} {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  window.onload = loadListName("{{ lname }}");
+</script>
+
+{% endblock %}

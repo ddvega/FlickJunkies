@@ -1,0 +1,85 @@
+{% extends "base.html" %} {% block title %} Movie List {% endblock %} {% block
+content %} {% include "movies/detailWindow.html" %}
+
+<div class="mainBlock">
+  <table
+    id="movie_table"
+    class="mainTable table table-condensed table-responsive table-hover sortable w-auto"
+  >
+    <thead>
+      <tr>
+        {% if isUserList %}
+        <th scope="col">Genre</th>
+        <th scope="col">Lang</th>
+        <th scope="col">Title</th>
+        <th scope="col">Year</th>
+        <th scope="col">Score</th>
+        <th scope="col">Delete</th>
+
+        {% else %}
+        <th scope="col">Genre</th>
+        <th scope="col">Lang</th>
+        <th scope="col">Title</th>
+        <th scope="col">Year</th>
+        <th scope="col">Score</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+    <tbody id="tab">
+      {% for r in data %} {% if isLocal %}
+      <tr
+        onclick="load_details('{{ r.poster }}','{{ r.genre }}','{{ r.lang }}',
+               '{{ r.title }}', '{{ r.date }}', '{{ r.rating }}','{{ r.overview }}',
+               '{{ r.tmdbID }}', '{{ r.cast }}');get_local()"
+      >
+        {% else %}
+      </tr>
+
+      <tr
+        onclick="load_details('{{ r.poster }}','{{ r.genre }}',
+              '{{ r.lang }}','{{ r.title }}',  '{{ r.date }}','{{ r.rating }}',
+              '{{ r.overview }}','{{ r.id }}');get_from_tmdb('{{ apikey }}')"
+      >
+        {% endif %} {% if isUserList %}
+        <td>{{ r.genre }}</td>
+        <td>{{ r.lang }}</td>
+        <td>{{ r.title }}</td>
+        <td>{{ r.date }}</td>
+        <td>{{ r.rating }}</td>
+        <td>
+          <form action="/userlists/" method="post">
+            {% csrf_token %}
+            <div class="btn btn-dark">
+              <input name="deleteMovie" type="hidden" value="{{r.id}}" />
+              <input name="listID" type="hidden" value="{{isUserList}}" />
+
+              <input
+                type="submit"
+                class="btn btn-sm darkButton"
+                value="delete"
+              />
+            </div>
+          </form>
+        </td>
+
+        {% else %}
+        <td>{{ r.genre }}</td>
+        <td>{{ r.lang }}</td>
+        <td>{{ r.title }}</td>
+        <td>{{ r.date }}</td>
+        <td>{{ r.rating }}</td>
+
+        {% endif %}
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  loadListName("{{ lname }}");
+</script>
+
+{% endblock %}

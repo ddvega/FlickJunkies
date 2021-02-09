@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="addSpace"></div>
+
+<div class="Container">
+  <form class="inline-block" action="/addList/" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-xs-4">
+        <input
+          type="text"
+          name="new"
+          class="form-control"
+          placeholder="name of list"
+        />
+      </div>
+
+      <div class="col-xs-4">
+        <label class="form-check-label">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            name="private"
+            value="True"
+          />make Private
+        </label>
+      </div>
+
+      <div class="col-xs-4">
+        <button
+          name="addNewList"
+          type="submit"
+          class="btn darkButton"
+          role="button"
+          aria-pressed="true"
+        >
+          create list
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="mainBlock">
+  <table
+    class="mainTable table table-condensed table-responsive table-hover sortable"
+  >
+    <thead>
+      <tr>
+        <th scope="col">List Name</th>
+        <th scope="col">Count</th>
+
+        <th scope="col">Private</th>
+        <th scope="col">View</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for r in data %}
+
+      <tr>
+        <td>{{ r.listName }}</td>
+        <td>{{ r.count }}</td>
+        <td>{{ r.private }}</td>
+        <td>
+          <form action="/userlists/" method="post">
+            {% csrf_token %}
+            <div>
+              <input
+                name="viewList"
+                type="hidden"
+                class="btn btn-dark"
+                id="remove"
+                value="{{r.id}}"
+              />
+              <input
+                type="submit"
+                class="btn btn-sm darkButton"
+                id="remove"
+                value="view"
+              />
+              <input
+                name="lname"
+                type="hidden"
+                class="btn btn-sm btn-dark"
+                value="{{r.listName}}"
+              />
+            </div>
+          </form>
+        </td>
+
+        <td>
+          <form action="/userlists/" method="post">
+            {% csrf_token %}
+            <div>
+              <input
+                name="deleteList"
+                type="hidden"
+                class="btn btn-dark"
+                id="remove"
+                value="{{r.id}}"
+              />
+
+              <input
+                type="submit"
+                class="btn btn-sm darkButton"
+                id="remove"
+                value="delete"
+              />
+            </div>
+          </form>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  window.onload = loadListName("{{ lname }}");
+</script>
+
+{% endblock %}

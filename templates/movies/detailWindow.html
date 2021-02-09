@@ -1,0 +1,137 @@
+<!--div will start off hidden until a row in the movie table is clicked-->
+<div class="addSpace1"></div>
+<div id="mydiv">
+  <div class="addSpace1"></div>
+  <div class="container">
+    <div class="row">
+      <!--      movie overview text box at the top of the screen-->
+      <div class="col-md-5 col-sm-6 col-xs-12 detailBoxFont">
+        <label>Overview</label>
+        <div class="scrollbar detailBoxFont overviewBox" id="style-3">
+          <div id="description"></div>
+        </div>
+
+        <div style="padding-bottom: 6px"></div>
+
+        <div class="row" style="text-align: center"></div>
+      </div>
+
+      <!--      movie cast text box at the top of the screen-->
+      <div
+        class="col-md-3 col-sm-6 col-xs-12 detailBoxFont"
+        style="padding-left: 30px"
+      >
+        <label>Cast</label>
+        <div class="scrollbar detailBoxFont castBox" id="style-3">
+          <div id="cast"></div>
+        </div>
+
+        <div style="padding-bottom: 10px"></div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12 detailBoxFont">
+            {% if not tmdb %}
+
+            <form action="/comments/" method="post">
+              {% csrf_token %}
+              <div>
+                <input id="comment" name="mid" type="hidden" value="" />
+                {% if user.is_authenticated %}
+                <input
+                  type="submit"
+                  class="btn btn-sm darkButton"
+                  value="Comments"
+                />
+                {% else %}
+                <button
+                  onclick="window.alert('please log in to see comments')"
+                  type="button"
+                  class="btn btn-sm darkButton"
+                  value="alert"
+                >
+                  Comments
+                </button>
+
+                {% endif %}
+              </div>
+            </form>
+            {% endif %}
+          </div>
+
+          <!--search button-->
+          <div class="col-md-6 col-sm-6 col-xs-12 detailBoxFont">
+            <button class="btn btn-sm darkButton" onclick="show_search()">
+              SEARCH
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--      movie poster-->
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div style="text-align: center">
+          <img class="image" id="poster" />
+        </div>
+
+        <!--          <div style="padding-bottom: 12px;"></div>-->
+
+        <!--          language row-->
+        <div style="text-align: center">
+          <label class="detailBoxFont">Language</label>
+          <div id="lang" class="scoreDiv"></div>
+        </div>
+
+        <div style="padding-bottom: 12px"></div>
+
+        <!--          Year and ______ row-->
+        <div style="text-align: center">
+          <label class="detailBoxFont">Year</label>
+          <div id="year" class="scoreDiv"></div>
+        </div>
+
+        <div style="padding-bottom: 12px"></div>
+
+        <div style="text-align: center">
+          <label class="detailBoxFont">Rating</label>
+          <div id="rating" class="scoreDiv"></div>
+        </div>
+
+        <div style="padding-bottom: 15px"></div>
+
+        {% if user.is_authenticated %}
+        <div style="text-align: center">
+          <div class="dropdown">
+            <button class="btn btn-sm darkButton">
+              AddMovie
+              <!--                <span class="caret"></span>-->
+            </button>
+
+            <div class="dropdown-content">
+              {% for r2 in data2 %}
+              <input
+                class="btn btn-sm clearButton"
+                name="listname"
+                type="submit"
+                value="{{ r2.listName }}"
+                onclick="passArrFromTMDB('{{ r2.id }}')"
+              />
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+      </div>
+
+      <!--      rating and year-->
+      <!-- <div class="col-md-2 col-sm-6 col-xs-12">
+
+
+
+
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div id="search">{% include "movies/findMovies.html" %}</div>

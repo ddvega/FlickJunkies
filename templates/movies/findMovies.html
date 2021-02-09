@@ -1,0 +1,76 @@
+<div class="mainBlock">
+  <div class="container">
+    <div class="row bootstrap snippets bootdeys">
+      <div class="col-md-5 col-sm-12"></div>
+
+      <!--      search boxes-->
+      <div class="col-md-2 col-sm-12">
+        <div class="detailBoxFont">
+          <form class="inline-block" action="/searchTMDB/" method="POST">
+            {% csrf_token %}
+            <label>Search</label>
+            <input
+              type="text"
+              name="actor"
+              class="form-control"
+              placeholder="Actor"
+            />
+            <div class="addSpace1"></div>
+            <input
+              type="text"
+              name="title"
+              class="form-control"
+              placeholder="Title"
+            />
+
+            <div class="addSpace1"></div>
+
+            <select class="selectpicker" data-width="140px" name="genre">
+              <option selected value="">Genre</option>
+              <option value="Action">Action</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Animation">Animation</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Crime">Crime</option>
+              <option value="Documentary">Documentary</option>
+              <option value="Drama">Drama</option>
+              <option value="Family">Family</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="History">History</option>
+              <option value="Horror">Horror</option>
+              <option value="Music">Music</option>
+              <option value="Mystery">Mystery</option>
+              <option value="Romance">Romance</option>
+              <option value="Science Fiction">Science Fiction</option>
+              <option value="Science Fiction">TV Movie</option>
+              <option value="Science Fiction">Thriller</option>
+              <option value="Science Fiction">War</option>
+              <option value="Science Fiction">Western</option>
+            </select>
+
+            <div class="addSpace1"></div>
+            <input
+              type="text"
+              name="year"
+              class="form-control"
+              placeholder="Release Year"
+            />
+            <div class="addSpace1"></div>
+
+            <button
+              name="search"
+              type="submit"
+              class="btn darkButton"
+              role="button"
+              aria-pressed="true"
+            >
+              search
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-5 col-sm-12"></div>
+    </div>
+  </div>
+</div>

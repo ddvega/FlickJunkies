@@ -1,0 +1,94 @@
+{% extends "base.html" %} {% block title %} Comments {% endblock %} {% block
+content %} {% include "movies/detailWindow.html" %}
+
+<div class="mainBlock">
+  <div class="container">
+    <div class="row bootstrap snippets bootdeys">
+      <div class="col-md-1 col-sm-12"></div>
+
+      <div class="col-md-10 col-sm-12">
+        <div class="comment-wrapper">
+          <div
+            class="panel panel-info"
+            style="background-color: #0b0c10; border: none"
+          >
+            <form class="panel-body" action="/addComments/" method="POST">
+              {% csrf_token %}
+
+              <textarea
+                name="comment"
+                class="form-control"
+                style="width: 750px; height: 100px; background-color: #0b0c10"
+                placeholder="write a comment..."
+                rows="3"
+              ></textarea>
+              <br />
+
+              <label class="form-check-label">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  name="spoiler"
+                  value="True"
+                />contains spoiler
+              </label>
+
+              <input type="hidden" name="mid" value="{{ movie.id }}" />
+              <button
+                name="addComment"
+                type="submit"
+                role="button"
+                class="btn btn-sm darkButton pull-right"
+              >
+                Post
+              </button>
+            </form>
+
+            <hr />
+            <ul
+              class="media-list"
+              style="background-color: #0b0c10; border: none"
+            >
+              {% for r in comments %}
+              <li class="media">
+                <a href="#" class="pull-left">
+                  <img
+                    src="https://bootdey.com/img/Content/user_1.jpg"
+                    alt=""
+                    class="img-circle"
+                  />
+                </a>
+                <div class="media-body">
+                  <span class="text-muted pull-right">
+                    <small class="text-muted">{{ r.date }}</small>
+                  </span>
+                  <strong class="text-success">@{{ r.user }}</strong>
+                  <p>{{ r.body }}</p>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 col-sm-12"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  load_details(
+    "{{ movie.poster }}",
+    "{{ movie.genre }}",
+    "{{ movie.lang }}",
+    "{{ movie.title }}",
+    "{{ movie.date }}",
+    "{{ movie.rating }}",
+    "{{ movie.overview }}",
+    "{{ movie.tmdbID }}",
+    "{{ movie.cast }}"
+  );
+  get_local();
+</script>
+
+{% endblock %}
