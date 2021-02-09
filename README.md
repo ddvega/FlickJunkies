@@ -24,8 +24,8 @@ D_HOST=<mysql hostname>
 D_PORT=<port>
 ```
 
-![1](https://github.com/ddvega/FlickJunkies/static/images/1.png)
+![1](https://github.com/ddvega/FlickJunkies/tree/main/static/images/1.png)
 
-![2](https://github.com/ddvega/FlickJunkies/static/images/2.png)
+![2](https://github.com/ddvega/FlickJunkies/tree/main/static/images/2.png)
 
-![3](https://github.com/ddvega/FlickJunkies/static/images/3.png)
+![3](https://github.com/ddvega/FlickJunkies/tree/main/static/images/3.png)
